@@ -1,0 +1,58 @@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model task_2.Models.ArmTemplateParams;
+ 
+
+ <head>
+    <meta name="viewport" content="width=device-width" />
+    <title>task 2</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/datatables/css/dataTables.bootstrap4.min.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12" style="margin-top: 2em">
+                <h2>ARM Template Generator</h2>
+            </div>            
+        </div>    
+        <div class="row" style="margin-top: 2em">
+            <div class="col-lg-12">
+                <form action="/Deployment/CreateTemplate" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="ResourceName" class="control-label"></label>
+                        <input asp-for="ResourceName" class="form-control" />
+                        <span asp-validation-for="ResourceName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ResourceGroup" class="control-label"></label>
+                        <input asp-for="ResourceGroup" class="form-control" />
+                        <span asp-validation-for="ResourceGroup" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ServiceOwner" class="control-label"></label>
+                        <input asp-for="ServiceOwner" class="form-control" />
+                        <span asp-validation-for="ServiceOwner" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="WarsawApiUrl" class="control-label"></label>
+                        <input asp-for="WarsawApiUrl" class="form-control" />
+                        <span asp-validation-for="WarsawApiUrl" class="text-danger"></span>
+                    </div>   
+                    <div class="form-group">
+                        <label asp-for="HostingPlanName" class="control-label"></label>
+                        <select asp-for="HostingPlanName" asp-items="@Model.HostingPlanNames"></select>
+                        <span asp-validation-for="HostingPlanName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EnvironmentType" class="control-label"></label>
+                        <select asp-for="EnvironmentType" asp-items="@Model.EnvironmentTypes"></select>
+                        <span asp-validation-for="EnvironmentType" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>            
+        </div>    
+    </div>
+</body>

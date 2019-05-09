@@ -1,0 +1,71 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>task 2</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <link rel="stylesheet" href="~/lib/twitter-bootstrap/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/datatables/css/dataTables.bootstrap4.min.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <div class="row" style="margin-top: 4em">
+            <div class="col-12">
+                <div class=" justify-content-center align-content-center">
+                    <div class="card">
+                        <div class="card-header">
+                            <p class="text-center"></p>
+                        </div>
+                        <div class="card-body">
+                            <table id="notifTable" class="table table-light table-bordered table-hover">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>District</th>
+                                        <th>Category</th>
+                                        <th>SubCategory</th>                                                                                
+                                        <th>NotificationType</th>
+                                        <th>Source</th>
+                                        <th>Event</th>
+                                        <th>CreateDate</th>                                        
+                                    </tr>
+                                    <!-- <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr> -->
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 offset-lg-9 text-right" style="margin-top: 1em">
+                <button id="btn-load" onclick="loadRemoteData()" type="button" class="btn btn-info">
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true" style="display:none"></span>
+                    Load Remote Data
+                </button>
+            </div>
+        </div>
+    </div>
+
+  
+    <script src="~/lib/jquery/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/momentjs/moment.min.js" asp-append-version="true"></script>
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+    <script src="~/lib/datatables/js/dataTables.bootstrap4.min.js" asp-append-version="true"></script>
+    <script src="~/js/app.js" asp-append-version="true"></script>
+</body>
+</html>
