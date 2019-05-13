@@ -3,8 +3,12 @@
     $('#btn-load').prop('disabled', true)
     $('#btn-load').html($('#btn-load').html().replace("Load Remote Data", "Loading ..."));
 
+    var dateFrom = new Date($("#dateFrom").datetimepicker('date')).getTime();
+    var dateTo = new Date($("#dateTo").datetimepicker('date')).getTime();
+    var url = `/Home/LoadRemoteData?dateFrom=${dateFrom}&dateTo=${dateTo}`
+
     $.get({
-        url: "/Home/LoadRemoteData/",
+        url: url,
         success: function () {
             $('#btn-load > span').hide();
             $('#btn-load').html($('#btn-load').html().replace("Loading ...", "Load Remote Data"));
@@ -27,18 +31,17 @@ function loadTable() {
             processing: "Loading Data...",
             zeroRecords: "No matching records found"
         },
+        lengthMenu: [[5, 10, 25, 50, 100], [5, 10, 25, 50, 100]],
         processing: true,
         serverSide: true,
-        // orderCellsTop: true,
-        autoWidth: true,
+        orderCellsTop: true,
         paging: true,
-        pagingType: "simple",
-        searching: true,
-        // deferRender: true,
-        // dom: '<tr>',
+        pagingType: "full_numbers",
+        searching: false,
+        deferRender: true,
         ajax: {
             type: "POST",
-            url: '/Home/LoadTable/',
+            url: "/Home/LoadTable/",
             contentType: "application/json; charset=utf-8",
             async: true,
             data: function (data) {
@@ -49,41 +52,80 @@ function loadTable() {
             {
                 title: "District",
                 data: "District",
-                name: "co"
+                name: "eq"
             },
             {
                 title: "Category",
                 data: "Category",
-                name: "co"
+                name: "eq"
             },
             {
                 title: "SubCategory",
                 data: "SubCategory",
-                name: "co"
+                name: "eq"
             },
             {
                 title: "NotificationType",
                 data: "NotificationType",
-                name: "co"
+                name: "eq"
             },
             {
                 title: "Source",
                 data: "Source",
-                name: "co"
+                name: "eq"
             },
             {
                 title: "Event",
                 data: "Event",
-                name: "co"
+                name: "eq"
             },
             {
                 title: "CreateDate",
                 data: "CreateDate",
                 render: function (data, type, row) {
-                    return window.moment(row.CreateDate).format("DD/MM/YYYY");
+                    return window.moment(row.CreateDate).format("DD/MM/YYYY HH:mm");
                 },
-                name: "eq"
+                name: "gt"
             },
         ]
     });
 }
+
+$('#dateFrom').datetimepicker({
+    icons: {
+        time: 'far fa-clock',
+        date: 'far fa-calendar',
+        up: 'fas fa-arrow-up',
+        down: 'fas fa-arrow-down',
+        previous: 'fas fa-chevron-left',
+        next: 'fas fa-chevron-right',
+        today: 'far fa-calendar-check-o',
+        clear: 'far fa-trash',
+        close: 'far fa-times'
+    },
+    format: 'DD.MM.YYYY HH:mm',
+    defaultDate: moment().subtract(1, 'days')
+    }
+);
+
+var p2 = $('#dateTo').datetimepicker({
+    icons: {
+        time: 'far fa-clock',
+        date: 'far fa-calendar',
+        up: 'fas fa-arrow-up',
+        down: 'fas fa-arrow-down',
+        previous: 'fas fa-chevron-left',
+        next: 'fas fa-chevron-right',
+        today: 'far fa-calendar-check-o',
+        clear: 'far fa-trash',
+        close: 'far fa-times'
+    },
+    format: 'DD.MM.YYYY HH:mm',
+    //buttons: {
+    //    showToday: true,
+    //    showClear: true,
+    //    showClose: true
+    //},
+    defaultDate: new Date($.now())
+    }
+);

@@ -45,7 +45,6 @@ namespace task_2.Controllers
                     recordsFiltered = _dtService.TotalRecords(),
                     recordsTotal = _dtService.TotalRecords()
                 });
-
             }
             catch (Exception e)
             {
@@ -55,13 +54,17 @@ namespace task_2.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> LoadRemoteData()
+        public async Task<IActionResult> LoadRemoteData(long dateFrom, long dateTo)
         {
             try
             {
                 using (var client = new HttpClient())
                 {
-                    var url = $"{this._settings.WarsawApiUrl}?id={this._settings.WarsawApiView}&apikey={this._settings.WarsawApiKey}";
+                    var url = $"{this._settings.WarsawApiUrl}?id={this._settings.WarsawApiView}";
+                    url = (dateFrom > 0) ? $"{url}&dateFrom={dateFrom}" : $"{url}&dateFrom={_settings.MinLinuxUtcTimestamp}";
+                    url = (dateTo > 0) ? $"{url}&dateTo={dateTo}" : $"{url}&dateTo={DateTimeOffset.UtcNow.ToUnixTimeSeconds()}";
+                    url = $"{url}&apikey={this._settings.WarsawApiKey}";
+
                     var response = await client.GetStringAsync(url);
                     var root = JObject.Parse(response);
 

@@ -1,0 +1,15 @@
+﻿.container-flex {
+    padding: 5em;
+}
+
+.voffset-sm {
+    margin-top: 1em;
+}
+
+.voffset-md {
+    margin-top: 4em;
+}
+
+.stretch {
+    width: 100%;
+}

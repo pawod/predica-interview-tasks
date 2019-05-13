@@ -26,6 +26,8 @@ namespace task_2.Models
         [Sortable(Default = true)]
         public string Source { get; set; }
 
+        [SearchableString]
+        [Sortable(Default = true)]
         public string Event { get; set; }
 
         [SearchableDateTime]
