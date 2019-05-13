@@ -1,4 +1,5 @@
-﻿function loadRemoteData() {
+﻿var table = null;
+function loadRemoteData() {
     $('#btn-load > span').show();
     $('#btn-load').prop('disabled', true)
     $('#btn-load').html($('#btn-load').html().replace("Load Remote Data", "Loading ..."));
@@ -26,7 +27,12 @@
 }
 
 function loadTable() {
-    var table = $('#notifTable').DataTable({
+    if (table) {
+        table.ajax.reload();
+        return;
+    }
+
+    table = $('#notifTable').DataTable({
         language: {
             processing: "Loading Data...",
             zeroRecords: "No matching records found"

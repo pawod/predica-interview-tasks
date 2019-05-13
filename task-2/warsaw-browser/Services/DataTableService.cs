@@ -22,6 +22,8 @@ namespace task_2.Services
 
         public async Task<int> SetDataAsync(NotificationEntity[] entities)
         {
+            var contained = this._context.Notifications.Select(r => r);
+            this._context.RemoveRange(contained);
             this._context.Notifications.AddRange(entities);
             return await this._context.SaveChangesAsync();
         }
@@ -34,7 +36,7 @@ namespace task_2.Services
 
             return await query
             .AsNoTracking()
-            .Skip(table.Start - 1 * table.Length)
+            .Skip(table.Start)
             .Take(table.Length)
             .ProjectTo<Notification>(_mappingConfiguration)
             .ToArrayAsync();           

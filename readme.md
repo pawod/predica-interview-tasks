@@ -20,12 +20,17 @@ The web app for browsing the Warsaw API results can be accessed via the web app 
 
 
 
-**Note:**  The Warsaw API is sensitive to large timespans, which exceed a certain number of records. If the number of records is too big, the API returns a HTTP 500 error. If you encounter issues with the selected date, reduce the specified timespan between start and end date.
+**Note:**  The Warsaw API appears to be sensitive to large timespans, which exceed a certain number of records. If the number of records is too big, the API returns a HTTP 500 error. If you encounter issues with the selected date, reduce the specified timespan between start and end date.
 
 The starting date is limited to a minimum value of `Friday, February 28, 2014 11:00:01 PM GMT`, since this is approximately the date, when first notifications have been recorded.
+
+Since API results seem to be limited to 100 records it is possible, that obtained results are truncated.
 
 
 
 ### Deployment Project:
 
 The project is designed to be executed via Visual Studio, which will prompt you to enter the missing deployment parameters. It is configured to deploy the solution's `WarsawBrowser` project as web application to azure using the provided deployment parameters.
+
+- For verification purposes the`ASPNETCORE_ENVIRONMENT` variable is logged at application startup.
+- The correct values for the Warsaw API parameters can be obtained from the project's  `appsettings.json`.
